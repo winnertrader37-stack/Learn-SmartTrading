@@ -1,1029 +1,888 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080d18">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>NAOL SMART TRADING</title>
+    <title>NAOL SMART TRADING</title>
 
-  <link rel="stylesheet" href="style.css">
+    <meta
+        name="description"
+        content="NAOL SMART TRADING - Live market charts, technical analysis and trading plans."
+    >
+
+    <meta name="theme-color" content="#080e19">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- TradingView chart library -->
+    <script
+        src="https://s3.tradingview.com/tv.js"
+        defer
+    ></script>
+
+    <!-- Main website JavaScript -->
+    <script src="script.js" defer></script>
 </head>
 
 <body>
 
-  <div class="app-shell">
+    <!-- =========================
+         TOP NAVIGATION
+    ========================== -->
 
-    <!-- HEADER -->
     <header class="topbar">
 
-      <a class="brand" href="#" aria-label="Naol Smart Trading home">
+        <a href="#" class="brand" id="brandHome">
+            <span class="brand-icon">N</span>
 
-        <span class="brand-mark">N</span>
+            <span class="brand-text">
+                <strong>NAOL</strong>
+                <span>SMART TRADING</span>
+            </span>
+        </a>
 
-        <span>
-          <strong>NAOL</strong>
-          <small>SMART TRADING</small>
-        </span>
+        <div class="header-status">
+            <span class="status-dot"></span>
+            <span id="connectionStatus">Connecting chart...</span>
+        </div>
 
-      </a>
-
-      <div class="top-status">
-
-        <span class="live-dot"></span>
-
-        <span id="dataBadge">DEMO DATA</span>
-
-        <span class="divider"></span>
-
-        <span>Practice workspace</span>
-
-      </div>
-
-      <button
-        class="icon-button"
-        id="resetApp"
-        title="Reset workspace"
-        aria-label="Reset workspace"
-      >
-        ↻
-      </button>
+        <button
+            type="button"
+            class="icon-button"
+            id="menuButton"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
 
     </header>
 
 
-    <main>
+    <!-- =========================
+         MAIN APPLICATION
+    ========================== -->
 
-      <!-- ============================= -->
-      <!-- STRATEGY SELECTION PAGE       -->
-      <!-- ============================= -->
+    <main class="app-container">
 
-      <section id="welcomeView" class="welcome-view">
+        <!-- Mobile navigation -->
+        <nav class="mobile-menu" id="mobileMenu" hidden>
 
-        <div class="hero-copy">
-
-          <div class="eyebrow">
-            <span></span>
-            ANALYZE · PRACTICE · IMPROVE
-          </div>
-
-          <h1>
-            Build your edge.<br>
-            <span>One chart at a time.</span>
-          </h1>
-
-          <p>
-            Choose a strategy, inspect market structure,
-            draw your plan, and test your reasoning.
-            No AI required.
-          </p>
-
-        </div>
-
-
-        <div class="section-heading">
-
-          <div>
-
-            <span class="eyebrow">STEP 01</span>
-
-            <h2>Choose your strategy</h2>
-
-          </div>
-
-          <span class="muted">
-            Select a workspace to continue
-          </span>
-
-        </div>
-
-
-        <!-- STRATEGY CARDS -->
-
-        <div class="strategy-grid">
-
-          <button
-            class="strategy-card featured"
-            data-strategy="Naol Smart Strategy"
-          >
-
-            <span class="card-icon">✦</span>
-
-            <span class="card-tag">RULE-BASED</span>
-
-            <strong>Naol Smart Strategy</strong>
-
-            <p>
-              Automatic structure, liquidity,
-              FVG and setup checks.
-            </p>
-
-            <span class="card-link">
-              Select strategy <b>↗</b>
-            </span>
-
-          </button>
-
-
-          <button
-            class="strategy-card"
-            data-strategy="Price Action + ICT"
-          >
-
-            <span class="card-icon">◈</span>
-
-            <strong>Price Action + ICT</strong>
-
-            <p>
-              Liquidity sweep, market structure
-              and candle confirmation.
-            </p>
-
-            <span class="card-link">
-              Select strategy <b>↗</b>
-            </span>
-
-          </button>
-
-
-          <button
-            class="strategy-card"
-            data-strategy="Price Action"
-          >
-
-            <span class="card-icon">▥</span>
-
-            <strong>Price Action</strong>
-
-            <p>
-              Trend, swing points,
-              support/resistance and candles.
-            </p>
-
-            <span class="card-link">
-              Select strategy <b>↗</b>
-            </span>
-
-          </button>
-
-
-          <button
-            class="strategy-card"
-            data-strategy="ICT"
-          >
-
-            <span class="card-icon">⌁</span>
-
-            <strong>ICT</strong>
-
-            <p>
-              Premium/discount, liquidity,
-              MSS and fair value gaps.
-            </p>
-
-            <span class="card-link">
-              Select strategy <b>↗</b>
-            </span>
-
-          </button>
-
-
-          <button
-            class="strategy-card"
-            data-strategy="SMC"
-          >
-
-            <span class="card-icon">⬡</span>
-
-            <strong>Smart Money Concepts</strong>
-
-            <p>
-              BOS, CHoCH, displacement
-              and order-block retests.
-            </p>
-
-            <span class="card-link">
-              Select strategy <b>↗</b>
-            </span>
-
-          </button>
-
-
-          <button
-            class="strategy-card"
-            data-strategy="Manual Strategy"
-          >
-
-            <span class="card-icon">✎</span>
-
-            <strong>Manual Strategy</strong>
-
-            <p>
-              Draw your own plan,
-              add notes and test your analysis.
-            </p>
-
-            <span class="card-link">
-              Select strategy <b>↗</b>
-            </span>
-
-          </button>
-
-        </div>
-
-
-        <!-- DEMO DATA NOTICE -->
-
-        <div class="notice">
-
-          <span>ⓘ</span>
-
-          <p>
-            <strong>Practice mode:</strong>
-            this starter version uses illustrative demo candles.
-            It does not connect to a broker or provide live prices.
-            Use it to learn the workflow before connecting
-            a market-data provider.
-          </p>
-
-        </div>
-
-      </section>
-
-
-
-      <!-- ============================= -->
-      <!-- TRADING WORKSPACE             -->
-      <!-- ============================= -->
-
-      <section id="workspaceView" class="workspace-view hidden">
-
-        <!-- WORKSPACE HEADER -->
-
-        <div class="workspace-head">
-
-          <div>
-
-            <button
-              class="back-button"
-              id="backHome"
-            >
-              ← Strategies
+            <button type="button" data-scroll="marketControls">
+                Markets
             </button>
 
-            <h1 id="workspaceTitle">
-              Naol Smart Strategy
-            </h1>
-
-            <p id="workspaceSubtitle">
-              Rule-based chart analysis and drawing workspace
-            </p>
-
-          </div>
-
-
-          <div class="head-actions">
-
-            <span class="demo-pill">
-              <span class="live-dot"></span>
-              DEMO MARKET
-            </span>
-
-            <button
-              class="primary-button"
-              id="runAnalysis"
-            >
-              ✦ Analyze chart
+            <button type="button" data-scroll="chartSection">
+                Live Chart
             </button>
 
-          </div>
+            <button type="button" data-scroll="analysisSection">
+                Analysis
+            </button>
 
-        </div>
+            <button type="button" data-scroll="tradePlanSection">
+                Trading Plan
+            </button>
 
-
-
-        <!-- MARKET CONTROLS -->
-
-        <div class="market-controls panel">
-
-          <label>
-            MARKET
-
-            <select id="symbolSelect">
-
-              <option>XAUUSD</option>
-              <option>BTCUSD</option>
-              <option>ETHUSD</option>
-              <option>EURUSD</option>
-              <option>SILVERUSDT</option>
-
-            </select>
-
-          </label>
+        </nav>
 
 
-          <label>
-            TIMEFRAME
+        <!-- =========================
+             WELCOME / STRATEGY VIEW
+        ========================== -->
 
-            <select id="timeframeSelect">
+        <section class="welcome-view" id="welcomeView">
 
-              <option>M1</option>
-              <option selected>M5</option>
-              <option>M15</option>
-              <option>M30</option>
-              <option>H1</option>
-              <option>H4</option>
-              <option>D1</option>
+            <div class="welcome-content">
 
-            </select>
-
-          </label>
-
-
-          <label>
-            MODE
-
-            <select id="modeSelect">
-
-              <option value="smart">
-                Smart analysis
-              </option>
-
-              <option value="manual">
-                Manual practice
-              </option>
-
-            </select>
-
-          </label>
-
-
-          <div class="market-price">
-
-            <small>DEMO PRICE</small>
-
-            <strong id="currentPrice">—</strong>
-
-            <span id="priceChange">
-              Illustrative only
-            </span>
-
-          </div>
-
-        </div>
-
-
-
-        <!-- CHART AND SIDE PANEL -->
-
-        <div class="workspace-grid">
-
-
-          <!-- CHART PANEL -->
-
-          <section class="chart-panel panel">
-
-            <div class="chart-heading">
-
-              <div>
-
-                <strong id="chartSymbol">XAUUSD</strong>
-
-                <span class="muted">
-                  · <span id="chartTf">M5</span>
-                </span>
-
-                <div class="chart-subline">
-
-                  Candlestick chart
-
-                  <span class="tiny-demo">
-                    DEMO
-                  </span>
-
+                <div class="eyebrow">
+                    <span class="status-dot"></span>
+                    MARKET ANALYSIS WORKSPACE
                 </div>
 
-              </div>
-
-
-              <div class="chart-tools-top">
-
-                <button
-                  id="toggleGrid"
-                  class="small-button"
-                >
-                  Grid
-                </button>
-
-                <button
-                  id="clearDrawings"
-                  class="small-button danger-text"
-                >
-                  Clear drawings
-                </button>
-
-              </div>
-
-            </div>
-
-
-
-            <!-- DRAWING TOOLBAR -->
-
-            <div
-              class="drawing-toolbar"
-              id="drawingToolbar"
-            >
-
-              <button
-                class="tool-button active"
-                data-tool="select"
-                title="Select and move"
-              >
-                ↖ <span>Select</span>
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="trend"
-                title="Trend line"
-              >
-                ／ <span>Trend</span>
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="horizontal"
-                title="Horizontal line"
-              >
-                ― <span>H-Line</span>
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="rectangle"
-                title="Rectangle zone"
-              >
-                ▱ <span>Zone</span>
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="arrow"
-                title="Arrow"
-              >
-                ➜ <span>Arrow</span>
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="text"
-                title="Add text note"
-              >
-                T <span>Text</span>
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="fib"
-                title="Fibonacci guide"
-              >
-                F <span>Fib</span>
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="buy"
-                title="Long position plan"
-              >
-                ↗ <span>Long</span>
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="sell"
-                title="Short position plan"
-              >
-                ↘ <span>Short</span>
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="erase"
-                title="Delete drawing"
-              >
-                ⌫ <span>Erase</span>
-              </button>
-
-
-              <button
-                class="tool-button"
-                id="undoDrawing"
-                title="Undo last drawing"
-              >
-                ↶ <span>Undo</span>
-              </button>
-
-            </div>
-
-
-
-            <!-- INTERACTIVE CANVAS -->
-
-            <div
-              class="chart-wrap"
-              id="chartWrap"
-            >
-
-              <canvas
-                id="chartCanvas"
-                aria-label="Interactive demo candlestick chart"
-              ></canvas>
-
-              <div
-                class="chart-hint"
-                id="chartHint"
-              >
-                Choose a drawing tool, then tap or drag on the chart.
-              </div>
-
-            </div>
-
-
-
-            <!-- CHART FOOTER -->
-
-            <div class="chart-footer">
-
-              <span id="chartMessage">
-                Demo candles · Click and drag to draw
-              </span>
-
-              <div>
-
-                <button
-                  class="small-button"
-                  id="zoomOut"
-                >
-                  −
-                </button>
-
-                <button
-                  class="small-button"
-                  id="zoomIn"
-                >
-                  +
-                </button>
-
-              </div>
-
-            </div>
-
-          </section>
-
-
-
-          <!-- RIGHT SIDEBAR -->
-
-          <aside class="side-column">
-
-
-            <!-- ANALYSIS STATUS -->
-
-            <section class="panel side-panel">
-
-              <div class="panel-title">
-
-                <div>
-
-                  <span class="eyebrow">
-                    STRATEGY ENGINE
-                  </span>
-
-                  <h3>Analysis status</h3>
-
-                </div>
-
-                <span
-                  class="status-pill"
-                  id="analysisState"
-                >
-                  READY
-                </span>
-
-              </div>
-
-
-
-              <div class="score-row">
-
-                <div
-                  class="score-ring"
-                  id="scoreRing"
-                >
-
-                  <span id="scoreValue">—</span>
-
-                  <small>/100</small>
-
-                </div>
-
-
-                <div>
-
-                  <strong id="signalTitle">
-                    Waiting for analysis
-                  </strong>
-
-                  <p id="signalDescription">
-                    Run analysis to inspect this demo chart.
-                  </p>
-
-                </div>
-
-              </div>
-
-
-
-              <div class="progress-track">
-
-                <span id="scoreBar"></span>
-
-              </div>
-
-
-
-              <div
-                class="check-list"
-                id="checkList"
-              >
-
-                <div class="check-item">
-
-                  <span class="check-dot"></span>
-
-                  <span>Market structure</span>
-
-                  <b>Pending</b>
-
-                </div>
-
-
-                <div class="check-item">
-
-                  <span class="check-dot"></span>
-
-                  <span>Trend & momentum</span>
-
-                  <b>Pending</b>
-
-                </div>
-
-
-                <div class="check-item">
-
-                  <span class="check-dot"></span>
-
-                  <span>Entry / risk plan</span>
-
-                  <b>Pending</b>
-
-                </div>
-
-              </div>
-
-
-
-              <button
-                class="secondary-button full-width"
-                id="checkManual"
-              >
-                Check my analysis
-              </button>
-
-            </section>
-
-
-
-            <!-- TRADE PLAN -->
-
-            <section class="panel side-panel">
-
-              <div class="panel-title">
-
-                <div>
-
-                  <span class="eyebrow">
-                    TRADE PLAN
-                  </span>
-
-                  <h3>Entry · SL · TP</h3>
-
-                </div>
-
-              </div>
-
-
-
-              <div class="trade-fields">
-
-                <label>
-                  Direction
-
-                  <select id="tradeDirection">
-
-                    <option value="buy">BUY</option>
-                    <option value="sell">SELL</option>
-
-                  </select>
-
-                </label>
-
-
-                <label>
-                  Entry
-
-                  <input
-                    id="entryInput"
-                    type="number"
-                    step="any"
-                    placeholder="Tap chart or enter"
-                  >
-
-                </label>
-
-
-                <label>
-                  Stop Loss
-
-                  <input
-                    id="slInput"
-                    type="number"
-                    step="any"
-                    placeholder="Stop price"
-                  >
-
-                </label>
-
-
-                <label>
-                  Take Profit
-
-                  <input
-                    id="tpInput"
-                    type="number"
-                    step="any"
-                    placeholder="Target price"
-                  >
-
-                </label>
-
-              </div>
-
-
-
-              <div class="rr-row">
-
-                <span>Risk / Reward</span>
-
-                <strong id="rrValue">—</strong>
-
-              </div>
-
-
-
-              <button
-                class="secondary-button full-width"
-                id="drawPlan"
-              >
-                Draw trade plan
-              </button>
-
-            </section>
-
-
-
-            <!-- NOTES AND BACKUP -->
-
-            <section class="panel side-panel notes-panel">
-
-              <div class="panel-title">
-
-                <div>
-
-                  <span class="eyebrow">
-                    YOUR WORKSPACE
-                  </span>
-
-                  <h3>Chart notes</h3>
-
-                </div>
-
-              </div>
-
-
-
-              <textarea
-                id="notesInput"
-                rows="3"
-                placeholder="Write your reasoning, setup rules or lessons..."
-              ></textarea>
-
-
-
-              <div class="note-actions">
-
-                <button
-                  class="small-button"
-                  id="saveNotes"
-                >
-                  Save notes
-                </button>
-
-
-                <button
-                  class="small-button"
-                  id="exportWork"
-                >
-                  Export backup
-                </button>
-
-
-                <label class="small-button import-label">
-
-                  Import
-
-                  <input
-                    type="file"
-                    id="importWork"
-                    accept=".json,application/json"
-                    hidden
-                  >
-
-                </label>
-
-              </div>
-
-
-
-              <p
-                class="micro-copy"
-                id="saveState"
-              >
-                Drawings and notes are saved in this browser.
-              </p>
-
-            </section>
-
-          </aside>
-
-        </div>
-
-
-
-        <!-- ANALYSIS REPORT -->
-
-        <section class="panel report-panel">
-
-          <div class="panel-title">
-
-            <div>
-
-              <span class="eyebrow">
-                LEARN FROM YOUR PLAN
-              </span>
-
-              <h3>Analysis report</h3>
-
-            </div>
-
-            <span class="muted">
-              Rules-based · Not a prediction guarantee
-            </span>
-
-          </div>
-
-
-
-          <div
-            id="reportContent"
-            class="report-content"
-          >
-
-            <div class="empty-report">
-
-              <span>✦</span>
-
-              <div>
-
-                <strong>
-                  Your report will appear here
-                </strong>
-
-                <p>
-                  Run analysis or check your manual plan
-                  to receive a score, feedback and learning tips.
+                <h1>
+                    Trade smarter.<br>
+                    <span>Analyze with confidence.</span>
+                </h1>
+
+                <p class="welcome-description">
+                    Live market charts, technical analysis and
+                    structured trading plans in one workspace.
                 </p>
 
-              </div>
+                <div class="welcome-actions">
+
+                    <button
+                        type="button"
+                        class="primary-button"
+                        id="runAnalysis"
+                    >
+                        Open Trading Workspace
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="skipWelcome"
+                    >
+                        Continue
+                    </button>
+
+                </div>
+
+                <div class="welcome-note">
+                    Market data is supplied by TradingView.
+                    Availability depends on the selected market.
+                </div>
 
             </div>
 
-          </div>
+
+            <!-- Strategy selection -->
+
+            <div class="strategy-heading">
+
+                <div>
+                    <p class="section-kicker">SELECT YOUR METHOD</p>
+                    <h2>Choose your strategy</h2>
+                    <p class="muted-text">
+                        Select a strategy to use in your analysis.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="strategy-grid">
+
+                <button
+                    type="button"
+                    class="strategy-card"
+                    data-strategy="naol"
+                    aria-pressed="true"
+                >
+                    <span class="strategy-icon">✦</span>
+
+                    <span class="strategy-label">RULE-BASED</span>
+
+                    <strong>Naol Smart Strategy</strong>
+
+                    <span class="strategy-description">
+                        Market structure, liquidity, candle patterns
+                        and multiple technical checks.
+                    </span>
+
+                    <span class="strategy-action">
+                        Select strategy ↗
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="strategy-card"
+                    data-strategy="ict"
+                    aria-pressed="false"
+                >
+                    <span class="strategy-icon">◇</span>
+
+                    <strong>Price Action + ICT</strong>
+
+                    <span class="strategy-description">
+                        Liquidity sweeps, market structure and
+                        candle confirmation.
+                    </span>
+
+                    <span class="strategy-action">
+                        Select strategy ↗
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="strategy-card"
+                    data-strategy="priceaction"
+                    aria-pressed="false"
+                >
+                    <span class="strategy-icon">▥</span>
+
+                    <strong>Price Action</strong>
+
+                    <span class="strategy-description">
+                        Trends, swing points, support,
+                        resistance and candlesticks.
+                    </span>
+
+                    <span class="strategy-action">
+                        Select strategy ↗
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="strategy-card"
+                    data-strategy="ict_only"
+                    aria-pressed="false"
+                >
+                    <span class="strategy-icon">⌁</span>
+
+                    <strong>ICT</strong>
+
+                    <span class="strategy-description">
+                        Premium and discount, liquidity,
+                        market structure shifts and FVG.
+                    </span>
+
+                    <span class="strategy-action">
+                        Select strategy ↗
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="strategy-card"
+                    data-strategy="smc"
+                    aria-pressed="false"
+                >
+                    <span class="strategy-icon">⬡</span>
+
+                    <strong>Smart Money Concepts</strong>
+
+                    <span class="strategy-description">
+                        BOS, CHoCH, displacement and
+                        order-block retests.
+                    </span>
+
+                    <span class="strategy-action">
+                        Select strategy ↗
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="strategy-card"
+                    data-strategy="manual"
+                    aria-pressed="false"
+                >
+                    <span class="strategy-icon">✎</span>
+
+                    <strong>Manual Strategy</strong>
+
+                    <span class="strategy-description">
+                        Build your own trading plan, add notes
+                        and record your analysis.
+                    </span>
+
+                    <span class="strategy-action">
+                        Select strategy ↗
+                    </span>
+                </button>
+
+            </div>
 
         </section>
 
 
+        <!-- =========================
+             WORKSPACE
+        ========================== -->
 
-        <!-- FOOTER -->
+        <section class="workspace-view" id="workspaceView" hidden>
 
-        <footer class="workspace-footer">
+            <!-- Workspace title -->
 
-          NAOL SMART TRADING · Educational practice only.
-          Demo data is not a live quote or financial advice.
+            <div class="workspace-heading">
 
-        </footer>
+                <div>
+                    <p class="section-kicker">NAOL TERMINAL</p>
 
-      </section>
+                    <h1>Trading Workspace</h1>
+
+                    <p class="muted-text" id="selectedStrategyLabel">
+                        Naol Smart Strategy
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="secondary-button compact-button"
+                    id="backHome"
+                >
+                    ← Strategies
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 MARKET SELECTORS
+            ========================== -->
+
+            <section
+                class="panel market-controls"
+                id="marketControls"
+            >
+
+                <div class="panel-heading">
+                    <div>
+                        <h2>Market</h2>
+                        <p class="muted-text">
+                            Select a symbol and timeframe.
+                        </p>
+                    </div>
+
+                    <span class="live-badge">
+                        <span class="status-dot"></span>
+                        LIVE CHART
+                    </span>
+                </div>
+
+
+                <div class="control-grid">
+
+                    <label class="field">
+                        <span>Market / Pair</span>
+
+                        <select id="symbolSelect">
+
+                            <option value="OANDA:XAUUSD">
+                                XAUUSD · Gold
+                            </option>
+
+                            <option value="BINANCE:BTCUSDT">
+                                BTCUSDT · Bitcoin
+                            </option>
+
+                            <option value="BINANCE:ETHUSDT">
+                                ETHUSDT · Ethereum
+                            </option>
+
+                            <option value="FX:EURUSD">
+                                EURUSD
+                            </option>
+
+                            <option value="FX:GBPUSD">
+                                GBPUSD
+                            </option>
+
+                            <option value="FX:USDJPY">
+                                USDJPY
+                            </option>
+
+                            <option value="FX:AUDUSD">
+                                AUDUSD
+                            </option>
+
+                            <option value="NASDAQ:AAPL">
+                                AAPL · Apple
+                            </option>
+
+                            <option value="NASDAQ:TSLA">
+                                TSLA · Tesla
+                            </option>
+
+                        </select>
+                    </label>
+
+
+                    <label class="field">
+                        <span>Timeframe</span>
+
+                        <select id="timeframeSelect">
+
+                            <option value="1">M1</option>
+                            <option value="5" selected>M5</option>
+                            <option value="15">M15</option>
+                            <option value="30">M30</option>
+                            <option value="60">H1</option>
+                            <option value="240">H4</option>
+                            <option value="1D">D1</option>
+                            <option value="1W">W1</option>
+
+                        </select>
+                    </label>
+
+
+                    <button
+                        type="button"
+                        class="primary-button control-button"
+                        id="applyMarket"
+                    >
+                        Apply Market
+                    </button>
+
+                </div>
+
+                <p class="small-note" id="marketMessage" aria-live="polite">
+                    Choose your market and timeframe.
+                </p>
+
+            </section>
+
+
+            <!-- =========================
+                 LIVE CHART
+            ========================== -->
+
+            <section
+                class="panel chart-panel"
+                id="chartSection"
+            >
+
+                <div class="panel-heading chart-heading">
+
+                    <div>
+                        <p class="section-kicker">PRICE ACTION</p>
+
+                        <h2 id="chartTitle">
+                            XAUUSD · Gold
+                        </h2>
+
+                        <p class="muted-text" id="chartSubtitle">
+                            5-minute chart
+                        </p>
+                    </div>
+
+                    <div class="chart-heading-actions">
+
+                        <button
+                            type="button"
+                            class="secondary-button compact-button"
+                            id="refreshChart"
+                        >
+                            ↻ Refresh
+                        </button>
+
+                        <button
+                            type="button"
+                            class="secondary-button compact-button"
+                            id="fullscreenChart"
+                        >
+                            ⛶ Expand
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-frame" id="chartFrame">
+
+                    <div
+                        id="tradingviewChart"
+                        class="tradingview-chart"
+                        aria-label="Live TradingView market chart"
+                    ></div>
+
+                </div>
+
+
+                <div class="chart-footer">
+
+                    <span class="chart-status">
+                        <span class="status-dot"></span>
+                        <span id="chartStatus">
+                            Loading live chart...
+                        </span>
+                    </span>
+
+                    <span class="chart-provider">
+                        Powered by TradingView
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 MARKET ANALYSIS
+            ========================== -->
+
+            <section
+                class="panel analysis-panel"
+                id="analysisSection"
+            >
+
+                <div class="panel-heading">
+
+                    <div>
+                        <p class="section-kicker">TECHNICAL REVIEW</p>
+                        <h2>Market Analysis</h2>
+
+                        <p class="muted-text">
+                            Review the chart and run a structured
+                            rule-based analysis.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="analysis-actions">
+
+                    <button
+                        type="button"
+                        class="primary-button"
+                        id="analyzeMarket"
+                    >
+                        Analyze Market
+                    </button>
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="clearAnalysis"
+                    >
+                        Clear Results
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="analysis-result"
+                    id="analysisResult"
+                    aria-live="polite"
+                >
+
+                    <div class="result-placeholder">
+                        <span class="result-placeholder-icon">⌁</span>
+
+                        <strong>Ready to analyze</strong>
+
+                        <p>
+                            Select a market, inspect its chart and
+                            press Analyze Market.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="analysis-disclaimer">
+                    Analysis is an educational, rule-based aid.
+                    It is not a guarantee of future price movement.
+                    Confirm findings against the live chart.
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 TRADING PLAN
+            ========================== -->
+
+            <section
+                class="panel trade-plan-panel"
+                id="tradePlanSection"
+            >
+
+                <div class="panel-heading">
+
+                    <div>
+                        <p class="section-kicker">TRADE MANAGEMENT</p>
+                        <h2>Trading Plan</h2>
+
+                        <p class="muted-text">
+                            Record your proposed entry, stop loss
+                            and take profit.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="plan-direction">
+
+                    <span class="field-title">Trade direction</span>
+
+                    <div class="direction-buttons">
+
+                        <button
+                            type="button"
+                            class="direction-button buy-button"
+                            id="selectBuy"
+                            aria-pressed="true"
+                        >
+                            BUY
+                        </button>
+
+                        <button
+                            type="button"
+                            class="direction-button sell-button"
+                            id="selectSell"
+                            aria-pressed="false"
+                        >
+                            SELL
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="control-grid plan-grid">
+
+                    <label class="field">
+                        <span>Entry Price</span>
+
+                        <input
+                            type="number"
+                            id="entryInput"
+                            placeholder="Enter entry price"
+                            step="any"
+                            inputmode="decimal"
+                        >
+                    </label>
+
+
+                    <label class="field">
+                        <span>Stop Loss</span>
+
+                        <input
+                            type="number"
+                            id="slInput"
+                            placeholder="Enter stop loss"
+                            step="any"
+                            inputmode="decimal"
+                        >
+                    </label>
+
+
+                    <label class="field">
+                        <span>Take Profit</span>
+
+                        <input
+                            type="number"
+                            id="tpInput"
+                            placeholder="Enter take profit"
+                            step="any"
+                            inputmode="decimal"
+                        >
+                    </label>
+
+                </div>
+
+
+                <div class="plan-actions">
+
+                    <button
+                        type="button"
+                        class="primary-button"
+                        id="drawPlan"
+                    >
+                        Validate Trading Plan
+                    </button>
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="clearPlan"
+                    >
+                        Clear Plan
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="plan-result"
+                    id="planResult"
+                    aria-live="polite"
+                ></div>
+
+                <p class="small-note">
+                    This creates an analysis plan only. It does not
+                    send orders to a broker.
+                </p>
+
+            </section>
+
+
+            <!-- =========================
+                 NOTES
+            ========================== -->
+
+            <section class="panel notes-panel" id="notesSection">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <p class="section-kicker">YOUR JOURNAL</p>
+                        <h2>Trading Notes</h2>
+
+                        <p class="muted-text">
+                            Record your observations and reasoning.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <label class="field">
+                    <span>Notes</span>
+
+                    <textarea
+                        id="notesInput"
+                        rows="5"
+                        placeholder="Write your market observations here..."
+                    ></textarea>
+                </label>
+
+
+                <div class="notes-actions">
+
+                    <button
+                        type="button"
+                        class="primary-button"
+                        id="saveNotes"
+                    >
+                        Save Notes
+                    </button>
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="exportWork"
+                    >
+                        Export Data
+                    </button>
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="importWork"
+                    >
+                        Import Data
+                    </button>
+
+                    <input
+                        type="file"
+                        id="importFile"
+                        accept=".json,application/json"
+                        hidden
+                    >
+
+                </div>
+
+
+                <p
+                    class="small-note"
+                    id="notesMessage"
+                    aria-live="polite"
+                ></p>
+
+            </section>
+
+
+            <!-- =========================
+                 TEXT LABEL DIALOG
+            ========================== -->
+
+            <dialog id="textDialog" class="text-dialog">
+
+                <form method="dialog" id="textDialogForm">
+
+                    <h2>Add chart note</h2>
+
+                    <p class="muted-text">
+                        Enter a short label for your chart observation.
+                    </p>
+
+                    <label class="field">
+                        <span>Label</span>
+
+                        <input
+                            type="text"
+                            id="chartTextInput"
+                            maxlength="100"
+                            placeholder="Example: Resistance zone"
+                        >
+                    </label>
+
+                    <div class="dialog-actions">
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            id="cancelChartText"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="primary-button"
+                            id="saveChartText"
+                        >
+                            Save Label
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </dialog>
+
+
+            <!-- =========================
+                 NOTIFICATION
+            ========================== -->
+
+            <div
+                id="toastMessage"
+                class="toast-message"
+                role="status"
+                aria-live="polite"
+            ></div>
+
+
+            <!-- =========================
+                 FOOTER
+            ========================== -->
+
+            <footer class="app-footer">
+
+                <div class="footer-brand">
+                    NAOL SMART TRADING
+                </div>
+
+                <p>
+                    Market charts are provided by TradingView.
+                    Data availability, delays and exchange coverage
+                    depend on the selected instrument.
+                </p>
+
+                <p>
+                    This website is an analysis and practice tool.
+                    It does not execute broker trades or guarantee
+                    trading results.
+                </p>
+
+            </footer>
+
+        </section>
 
     </main>
 
-  </div>
 
+    <!-- =========================
+         JAVASCRIPT-FREE NOTICE
+    ========================== -->
 
-
-  <!-- TOAST MESSAGE -->
-
-  <div
-    id="toast"
-    class="toast"
-    role="status"
-    aria-live="polite"
-  ></div>
-
-
-
-  <!-- ADD TEXT DIALOG -->
-
-  <dialog
-    id="textDialog"
-    class="text-dialog"
-  >
-
-    <form method="dialog">
-
-      <h3>Add chart note</h3>
-
-      <p>
-        Write a short label for the selected chart location.
-      </p>
-
-
-      <input
-        id="chartTextInput"
-        maxlength="90"
-        placeholder="e.g. H1 Bullish Order Block"
-      >
-
-
-      <div class="dialog-actions">
-
-        <button
-          class="secondary-button"
-          value="cancel"
-        >
-          Cancel
-        </button>
-
-
-        <button
-          class="primary-button"
-          id="saveChartText"
-          value="save"
-        >
-          Add text
-        </button>
-
-      </div>
-
-    </form>
-
-  </dialog>
-
-
-
-  <!-- JAVASCRIPT -->
-
-  <script src="script.js" defer></script>
+    <noscript>
+        <div class="noscript-warning">
+            JavaScript is required to use NAOL SMART TRADING.
+            Please enable JavaScript in your browser.
+        </div>
+    </noscript>
 
 </body>
 </html>
